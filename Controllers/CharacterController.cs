@@ -23,21 +23,20 @@ namespace Udemy.Controllers
         [HttpGet("GetAll")]
         public ActionResult<List<Character>> Get()
         {
-            return Ok(characters);
+            return Ok(characterService.GetAllCharacters());
         }
 
         [HttpGet("{id}")]
         public ActionResult<Character> GetSingle(int id)
         {
-            return Ok(characters.FirstOrDefault(c => c.Id == id));
+            return Ok(characterService.GetCharacterById(id));
         }
 
         [HttpPost]
 
         public ActionResult<List<Character>> AddCharacter(Character newCharacter) 
         {
-            characters.Add(newCharacter);
-            return Ok(characters);
+            return Ok(characterService.AddCharacter(newCharacter));
         }
     }
 }
