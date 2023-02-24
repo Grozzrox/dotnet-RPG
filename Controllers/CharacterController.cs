@@ -39,5 +39,18 @@ namespace Udemy.Controllers
         {
             return Ok(await characterService.AddCharacter(newCharacter));
         }
+
+        [HttpPut]
+
+        public async Task<ActionResult<ServiceResponse<GetCharacterDTO>>> UpdateCharacter(UpdateCharacterDTO updatedCharacter) 
+        {
+            var response = await characterService.UpdateCharacter(updatedCharacter);
+
+            if (response.Data == null) 
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
+        }
     }
 }

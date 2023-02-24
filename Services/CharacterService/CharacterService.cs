@@ -45,5 +45,31 @@ namespace Udemy.Services.CharacterService
             serviceResponse.Data = mapper.Map<GetCharacterDTO>(character);
             return serviceResponse;
         }
+
+        public async Task<ServiceResponse<GetCharacterDTO>> UpdateCharacter(UpdateCharacterDTO updatedCharacter)
+        {
+            ServiceResponse<GetCharacterDTO> response = new ServiceResponse<GetCharacterDTO>();
+
+            try 
+            {
+            Character character = characters.First(c => c.Id == updatedCharacter.Id);
+
+            character.Name = updatedCharacter.Name;
+            character.HitPoints = updatedCharacter.HitPoints;
+            character.Strength = updatedCharacter.Strength;
+            character.Defense = updatedCharacter.Defense;
+            character.Intelligence = updatedCharacter.Intelligence;
+            character.Class = updatedCharacter.Class;
+
+            response.Data = mapper.Map<GetCharacterDTO>(character);
+            }
+            catch (Exception ex) 
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
     }
 }
